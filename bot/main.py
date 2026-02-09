@@ -2,7 +2,7 @@ from telegram.ext import Updater, CommandHandler
 
 from .config import Settings
 
-from .handlers import start_polling
+from .handlers import start_command, help_command, convert_command
 
 
 def main() -> None:
@@ -10,7 +10,13 @@ def main() -> None:
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(
-        handler=CommandHandler(command="start", callback=start_polling)
+        handler=CommandHandler(command="start", callback=start_command)
+    )
+    dispatcher.add_handler(
+        handler=CommandHandler(command="help", callback=help_command)
+    )
+    dispatcher.add_handler(
+        handler=CommandHandler(command="convert", callback=convert_command)
     )
 
     updater.start_polling()
