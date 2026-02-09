@@ -19,3 +19,10 @@ The bot is designed with a simple and intuitive user experience in mind: minimal
 ## How It Works
 
 Users can convert currencies by simply sending a message with an amount and currency.
+
+### Examples
+
+100 USD
+100 USD to RUB
+25000 UZS to USD
+50 RUB to USD
