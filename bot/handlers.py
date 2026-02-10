@@ -1,14 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from .utils import (
-    usd_to_uzs,
-    usd_to_rub,
-    uzs_to_usd,
-    uzs_to_rub,
-    rub_to_usd,
-    rub_to_uzs
-)
+from .utils import Convertor
 
 
 def start_command(update: Update, context: CallbackContext):
@@ -54,17 +47,17 @@ def convert_command(update: Update, context: CallbackContext):
     
     result = None
     if from_cur == "USD" and to_cur == "UZS":
-        result = usd_to_uzs(amount)
+        result = Convertor.usd_to_uzs(amount)
     elif from_cur == "USD" and to_cur == "RUB":
-        result = usd_to_rub(amount)
+        result = Convertor.usd_to_rub(amount)
     elif from_cur == "UZS" and to_cur == "USD":
-        result = uzs_to_usd(amount)
+        result = Convertor.uzs_to_usd(amount)
     elif from_cur == "UZS" and to_cur == "RUB":
-        result = uzs_to_rub(amount)
+        result = Convertor.uzs_to_rub(amount)
     elif from_cur == "RUB" and to_cur == "USD":
-        result = rub_to_usd(amount)
+        result = Convertor.rub_to_usd(amount)
     elif from_cur == "RUB" and to_cur == "UZS":
-        result = rub_to_uzs(amount)
+        result = Convertor.rub_to_uzs(amount)
     else:
         update.message.reply_text("Kechirasiz, bu valyuta kombinatsiyasi qo‘llab-quvvatlanmaydi.")
         return
