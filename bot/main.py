@@ -2,7 +2,7 @@ from telegram.ext import Updater, CommandHandler
 
 from .config import Settings
 
-from .handlers import start_command, help_command, convert_command
+from .handlers import start_command, help_command, convert_command, rate
 
 
 def main() -> None:
@@ -18,6 +18,7 @@ def main() -> None:
     dispatcher.add_handler(
         handler=CommandHandler(command="convert", callback=convert_command)
     )
+    dispatcher.add_handler(handler=CommandHandler(command="kurs", callback=rate))
 
     updater.start_polling()
     updater.idle()

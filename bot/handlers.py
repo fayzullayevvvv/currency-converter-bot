@@ -1,5 +1,6 @@
 from telegram import Update
 from telegram.ext import CallbackContext
+import requests
 
 from .utils import Converter
 
@@ -17,18 +18,10 @@ def start_command(update: Update, context: CallbackContext):
 
 def help_command(update: Update, context: CallbackContext):
     help_text = (
-        "🔹 *Pul konvertor — yordam*\n\n"
-        "Quyidagicha foydalaning:\n\n"
-        "1) Oddiy konvertatsiya (buyruq orqali):\n"
-        "   /convert 100 USD UZS\n"
-        "   — Bu 100 AQSH dollarini soʻmga aylantirishni soʻraydi.\n\n"
-        "2) Oddiy format qoidalari:\n"
-        "   • Miqdor (raqam) — masalan: 100, 12.5\n"
-        "   • Valyuta kodi — 3-harfli kod: USD, UZS, RUB.\n\n"
-        "3) Misollar:\n"
-        "   /convert 50 USD UZS\n"
-        "   /convert 1000 UZS RUB\n\n"
-        "Eslatma: real kurslar uchun bot internetdan kurslarni oladi."
+        "ℹ️ *Yordam*\n\n"
+        "🔹 /kurs — 1 USD va 1 RUB necha so‘m ekanini ko‘rsatadi\n\n"
+        "🔹 /convert — valyuta aylantirish\n"
+        "   Misol: /convert 100 USD UZS"
     )
 
     update.message.reply_text(help_text)
@@ -70,3 +63,20 @@ def convert_command(update: Update, context: CallbackContext):
         return
 
     update.message.reply_text(f"{amount} {from_cur} = {result} {to_cur}")
+
+
+def rate(update: Update, context: CallbackContext):
+    usd = requests.get("https://cbu.uz/oz/arkhiv-kursov-valyut/json/USD/").json()
+
+    rub = requests.get("https://cbu.uz/oz/arkhiv-kursov-valyut/json/RUB/").json()
+
+    usd_rate = float(usd[0]["Rate"])
+    rub_rate = float(rub[0]["Rate"])
+
+    text = (
+        "💱 *Bugungi valyuta kurslari:*\n\n"
+        f"🇺🇸 1 USD = {usd_rate:,.2f} UZS\n"
+        f"🇷🇺 1 RUB = {rub_rate:,.2f} UZS"
+    )
+
+    update.message.reply_text(text, parse_mode="Markdown")
