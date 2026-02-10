@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from .utils import Convertor
+from .utils import Converter
 
 
 def start_command(update: Update, context: CallbackContext):
@@ -48,7 +48,7 @@ def convert_command(update: Update, context: CallbackContext):
         update.message.reply_text("Miqdor raqam bo‘lishi kerak!")
         return
 
-    convertor = Convertor()
+    convertor = Converter()
 
     result = None
     if from_cur == "USD" and to_cur == "UZS":

@@ -10,19 +10,19 @@ class Converter:
         self.rub_rate = float(rub[0]["Rate"])
 
     def usd_to_uzs(self, amount):
-        return round(amount * self.usd_rate, 2)
+        return f"{amount * self.usd_rate:,.2f}"
 
     def usd_to_rub(self, amount):
-        return round((amount * self.usd_rate) / self.rub_rate, 2)
+        return f"{(amount * self.usd_rate) / self.rub_rate:,.2f}"
 
     def uzs_to_usd(self, amount):
-        return round(amount / self.usd_rate, 2)
+        return f"{amount / self.usd_rate:,.2f}"
 
     def uzs_to_rub(self, amount):
-        return round((amount / self.usd_rate) * self.rub_rate, 2)
+        return f"{(amount / self.usd_rate) * self.rub_rate:,.2f}"
 
     def rub_to_usd(self, amount):
-        return round((amount * self.rub_rate) / self.usd_rate, 2)
+        return f"{(amount * self.rub_rate) / self.usd_rate:,.2f}"
 
     def rub_to_uzs(self, amount):
-        return round(amount * self.rub_rate, 2)
+        return f"{amount * self.rub_rate:,.2f}"
